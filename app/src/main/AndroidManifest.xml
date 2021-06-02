@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SurveyTool">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,9 @@
 
         </activity>
         <activity android:name=".AdminRegisterActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity">
 
         </activity>
     </application>
