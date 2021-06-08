@@ -51,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             username.setText("");
             password.setText("");
             Intent intent =new Intent(getApplicationContext(),AdminSurveyActivity.class);
-            startActivity(intent);
+            intent.putExtra("id",loginData.getId());
+            startActivityForResult(intent,1);
         }
         else
         {
