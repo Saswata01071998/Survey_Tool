@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.surveytool.datamodels.SurveyData;
@@ -20,10 +22,12 @@ public class AdminSurveyAdapter extends RecyclerView.Adapter<AdminSurveyAdapter.
 
     Context ctx;
     RealmResults<SurveyData> survey_list;
+    AppCompatActivity appcompat;
 
-    public AdminSurveyAdapter(Context ctx, RealmResults<SurveyData> survey_list) {
+    public AdminSurveyAdapter(Context ctx, RealmResults<SurveyData> survey_list,AppCompatActivity appcompat) {
         this.ctx=ctx;
         this.survey_list=survey_list;
+        this.appcompat=appcompat;
 
     }
 
@@ -32,7 +36,7 @@ public class AdminSurveyAdapter extends RecyclerView.Adapter<AdminSurveyAdapter.
     public AdminSurveyAdapter.AdminSurveyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater2 = LayoutInflater.from(ctx);
-        View view2 = inflater2.inflate(R.layout.card_view , null);
+        View view2 = inflater2.inflate(R.layout.admin_cardview , null);
         return new AdminSurveyHolder(view2);
     }
 
@@ -54,11 +58,22 @@ public class AdminSurveyAdapter extends RecyclerView.Adapter<AdminSurveyAdapter.
     class AdminSurveyHolder extends RecyclerView.ViewHolder {
 
         TextView textView,count,id;
+        Button del;
         public AdminSurveyHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.survey_name);
-            count = itemView.findViewById(R.id.survey_count);
-            id=itemView.findViewById(R.id.survey_id);
+            textView = itemView.findViewById(R.id.survey_name2);
+            count = itemView.findViewById(R.id.survey_count2);
+            id=itemView.findViewById(R.id.survey_id2);
+            del=itemView.findViewById(R.id.delete);
+
+            del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DeleteSurvey deleteSurvey = new DeleteSurvey(id.getText().toString(),ctx);
+                    deleteSurvey.deleteSurvey();
+                    deleteSurvey.recreateApp(appcompat);
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

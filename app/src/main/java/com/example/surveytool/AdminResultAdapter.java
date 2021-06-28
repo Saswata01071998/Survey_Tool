@@ -27,6 +27,8 @@ public class AdminResultAdapter extends RecyclerView.Adapter<AdminResultAdapter.
         this.ctx = ctx;
         this.realmResults = realmResults;
         this.total_attempts = total_attempts;
+        if(this.total_attempts==0)
+            total_attempts=1;
     }
 
     @NonNull
@@ -40,7 +42,7 @@ public class AdminResultAdapter extends RecyclerView.Adapter<AdminResultAdapter.
     @Override
     public void onBindViewHolder(@NonNull AdminResultViewHolder holder, int position) {
 
-        int count,chk;
+        int count,chk=0;
         QuestionData obj= realmResults.get(position);
         holder.q.setText(obj.getQuestion_body());
 
@@ -48,24 +50,28 @@ public class AdminResultAdapter extends RecyclerView.Adapter<AdminResultAdapter.
         responseDataRealmResults = realm.where(ResponseData.class).equalTo("question_id",obj.getQuestion_id()).findAll();
         holder.op1.setText(responseDataRealmResults.get(0).getResponse());
         count=responseDataRealmResults.get(0).getCount();
-         chk=(100*count/total_attempts);
-        holder.p1.setProgress(chk);
+        if(total_attempts!=0){
+        chk=(100*count/total_attempts);
+        holder.p1.setProgress(chk);}
 
 
         holder.op2.setText(responseDataRealmResults.get(1).getResponse());
         count=responseDataRealmResults.get(1).getCount();
+        if(total_attempts!=0){
         chk=(100*count/total_attempts);
-        holder.p2.setProgress(chk);
+        holder.p2.setProgress(chk);}
 
         holder.op3.setText(responseDataRealmResults.get(2).getResponse());
         count=responseDataRealmResults.get(2).getCount();
+        if(total_attempts!=0){
         chk=(100*count/total_attempts);
-        holder.p3.setProgress(chk);
+        holder.p3.setProgress(chk);}
 
         holder.op4.setText(responseDataRealmResults.get(3).getResponse());
         count=responseDataRealmResults.get(3).getCount();
+        if(total_attempts!=0){
         chk=(100*count/total_attempts);
-        holder.p4.setProgress(chk);
+        holder.p4.setProgress(chk);}
     }
 
     @Override

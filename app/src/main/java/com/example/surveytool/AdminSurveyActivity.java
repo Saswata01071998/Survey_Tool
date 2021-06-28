@@ -38,7 +38,7 @@ public class AdminSurveyActivity extends AppCompatActivity {
         realmResults = realm.where(SurveyData.class).equalTo("admin_id",adminId).findAll();
 
 
-        AdminSurveyAdapter adapter = new AdminSurveyAdapter(this,realmResults);
+        AdminSurveyAdapter adapter = new AdminSurveyAdapter(this,realmResults,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -59,7 +59,7 @@ public class AdminSurveyActivity extends AppCompatActivity {
         realmResults = realm.where(SurveyData.class).equalTo("admin_id",adminId).findAll();
 
 
-        AdminSurveyAdapter adapter = new AdminSurveyAdapter(this,realmResults);
+        AdminSurveyAdapter adapter = new AdminSurveyAdapter(this,realmResults,this);
         recyclerView.setAdapter(adapter);
     }
 }
